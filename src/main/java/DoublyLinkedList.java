@@ -43,6 +43,36 @@ public class DoublyLinkedList {
         size++;
     }
 
+    public void add(int data, int position) {
+        if (position < 0 || position > size) {
+            throw new RuntimeException("Không hợp lệ!");
+        } else if (position == 0) {
+            addFirst(data);
+        } else if (position == size) {
+            addLast(data);
+        } else {
+            // Tìm ra Node ở vị trí position -1
+            Node previousNode = head;
+            for (int i = 0; i < position - 1; i++) {
+                previousNode = previousNode.getNext();
+            }
+            // Đã có previous -> lấy vị trí position
+            Node currentNode = previousNode.getNext();
+
+            // Tao node moi
+            Node tmp = new Node(data);
+            previousNode.setNext(tmp);
+            tmp.setPrevious(previousNode);
+
+            tmp.setNext(currentNode);
+            currentNode.setPrevious(tmp);
+            // Tang size
+            size++;
+
+        }
+    }
+
+
     public void display() {
         if (size == 0) {
             System.out.println("Danh sách rỗng!");

@@ -6,7 +6,16 @@ public class Main {
         doublyLinkedList.addFirst(20);
         doublyLinkedList.display(); // 20<->10
         doublyLinkedList.addLast(30);
+        doublyLinkedList.display(); // 20 10 30
+        doublyLinkedList.add(40, 1);
+        doublyLinkedList.display(); // 20 40 10 30
+        doublyLinkedList.add(50, 2);
+        doublyLinkedList.display(); // 20 40 50 10 30
+        doublyLinkedList.add(60, 0);
         doublyLinkedList.display();
+        doublyLinkedList.add(70, 6);
+        doublyLinkedList.display();
+
 
         System.out.println();
 
