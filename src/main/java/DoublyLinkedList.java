@@ -68,8 +68,79 @@ public class DoublyLinkedList {
             currentNode.setPrevious(tmp);
             // Tang size
             size++;
+        }
+    }
+
+    public void removeFirst() {
+        if (size == 0) {
+            throw new RuntimeException("Danh sách rỗng!");
+        } else if (size == 1) {
+            head = null;
+            size--;
+        } else {
+            // Lớn hơn 1
+            // Cần tìm ra next của head hiện tại
+            Node next = head.getNext();
+            next.setPrevious(null);
+            head.setNext(null);
+
+            head = next;
+
+            size--;
+        }
+    }
+
+    public void removeLast() {
+        if (size == 0) {
+            throw new RuntimeException("Danh sách rỗng!");
+        } else if (size == 1) {
+            head = null;
+            size--;
+        } else {
+            // Cần tìm ra vị trí node gần cuối và cuối
+            // Vi tri gan cuoi: index = size - 2
+            Node nearLastNode = head;
+            for (int i = 0; i < size - 2; i++) {
+                nearLastNode = nearLastNode.getNext();
+            }
+            Node lastNode = nearLastNode.getNext();
+
+            nearLastNode.setNext(null);
+            lastNode.setPrevious(null);
+
+            size--;
 
         }
+    }
+
+    public void remove(int position) {
+        if (size == 0) {
+            throw new RuntimeException("Danh sách rỗng!");
+        }
+        if (position == 0) {
+            removeFirst();
+        } else if (position == size - 1) {
+            removeLast();
+        } else if (position < 0 || position >= size) {
+            throw new RuntimeException("Không hợp lệ!");
+        } else {
+            // Hợp lệ -> xoá ở giữa
+            Node previousNode = head;
+            for (int i = 0; i < position - 1; i++) {
+                previousNode = previousNode.getNext();
+            }
+            Node positionNode = previousNode.getNext();
+
+            Node nextNode = positionNode.getNext();
+
+            previousNode.setNext(nextNode);
+            nextNode.setPrevious(previousNode);
+            positionNode.setNext(null);
+            positionNode.setPrevious(null);
+            size--;
+
+        }
+
     }
 
 
